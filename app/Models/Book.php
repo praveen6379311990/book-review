@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Model;
 class Book extends Model
 {
     use HasFactory;
+    protected $fillable = ['review', 'rating'];
     public function reviews()
     {
         return $this->hasMany(Review::class);
@@ -41,7 +42,7 @@ class Book extends Model
 
     public function scopeHighestRated(Builder $query, $from = null, $to = null): Builder
     {
-        return $query->scopeWithAvgRating()
+        return $query->withAvgRating()
             ->orderBy('reviews_avg_rating', 'desc');
     }
 
