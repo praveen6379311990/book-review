@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use App\Models\Book;
 use Illuminate\Http\Request;
+use Illuminate\Queue\Middleware\RateLimited;
 
 class ReviewController extends Controller
 {
@@ -21,7 +22,7 @@ class ReviewController extends Controller
      */
     public function create(Book $book)
     {
-        return view("books.reviews.create",["book"=>$book]);
+        return view("books.reviews.create", ["book" => $book]);
     }
 
     /**
@@ -36,7 +37,7 @@ class ReviewController extends Controller
 
         $book->reviews()->create($data);
 
-        return redirect()->route('books.show',$book);
+        return redirect()->route('books.show', $book);
     }
 
     /**
